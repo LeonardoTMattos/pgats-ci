@@ -1,0 +1,24 @@
+image: node:24
+
+stages:
+  - test
+
+e2e-testes:
+  stage: test
+
+  before_script:
+    - npm install -g yarn
+    - yarn
+    - yarn playwright install --with-deps
+
+  script:
+    - yarn run e2e
+
+  artifacts:
+    when: always
+    paths:
+      - playwright-report/
+    expire_in: 7 days
+
+  rules:
+    - when: manual
