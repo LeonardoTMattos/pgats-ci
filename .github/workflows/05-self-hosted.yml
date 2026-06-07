@@ -1,4 +1,4 @@
-name: "N5 - Self-Hosted Windows"
+name: 'N5 - Self-Hosted Windows'
 
 on:
   workflow_dispatch:
