@@ -1,0 +1,31 @@
+name: "N5 - Self-Hosted Windows"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  e2e-tests:
+    runs-on: self-hosted
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verificando Node
+        run: node --version
+
+      - name: Instalando dependencias
+        run: yarn
+
+      - name: Instalando browsers Playwright
+        run: yarn playwright install --with-deps
+
+      - name: Executando testes E2E
+        run: yarn run e2e
+
+      - name: Salvando relatorio
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-self-hosted
+          path: playwright-report/
+          retention-days: 7
